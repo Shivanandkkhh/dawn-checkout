@@ -60,7 +60,27 @@
           {% endif %}
           class="product-variant-id"
         >
-
+          <input
+            type="hidden"
+            name="properties[bundleQuantity]"
+            value= "2"
+          >
+            <input
+              type="hidden"
+              name="properties[bundleGroupType]"
+              value= "unique"
+            >
+              <input
+                type="hidden"
+                name="properties[collectionHandle]"
+                value= "kuchVi"
+              >
+                <input
+                  type="hidden"
+                  name="properties[discountPercentage]"
+                  value= "20"
+                >
+  
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
