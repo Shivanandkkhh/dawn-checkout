@@ -10,6 +10,23 @@
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
 {% endcomment %}
+{% style %}
+.values_in_line{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Height_measure{
+  border: 1px solid green;
+  padding: 7px;
+  margin: 5px 0 ;
+}
+.Width_measure{
+  border: 1px solid blue;
+  padding: 7px;
+  margin: 5px 0 ;
+}
+{% endstyle %}
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
     {%- liquid
@@ -60,27 +77,122 @@
           {% endif %}
           class="product-variant-id"
         >
-          <input
-            type="hidden"
-            name="properties[bundleQuantity]"
-            value= "2"
-          >
-            <input
-              type="hidden"
-              name="properties[bundleGroupType]"
-              value= "unique"
-            >
-              <input
-                type="hidden"
-                name="properties[collectionHandle]"
-                value= "kuchVi"
-              >
-                <input
-                  type="hidden"
-                  name="properties[discountPercentage]"
-                  value= "20"
-                >
-  
+        <input
+          type="hidden"
+          name="properties[bundleQuantity]"
+          value=""
+        >
+        <input
+          type="hidden"
+          name="properties[bundleGroupType]"
+          value="unique"
+        >
+        <input
+          type="hidden"
+          name="properties[collectionHandle]"
+          value="kuchVi"
+        >
+        <input
+          type="hidden"
+          name="properties[discountPercentage]"
+          value="20"
+        >
+        <div class="Height_measure">
+          <div class="Height_measure_feet values_in_line">
+            <label for="height">Choose a height:</label>
+            <select name="height" id="height" data-height-feet-main>
+              <option value="1feet">1 feet</option>
+              <option value="2feet">2 feet</option>
+              <option value="3feet">3 feet</option>
+              <option value="4feet">4 feet</option>
+            </select>
+             
+            <input type="hidden" id="hiddenheight" name="hiddenheight">
+            <div data-height></div>
+          </div>
+          <div class="values_in_line">
+            <label for="height_inch"> inch:</label>
+            <select name="height_inch" id="height_inch" data-height-inch-main>
+              <option value="1inch">1 inch</option>
+              <option value="2inch">2 inch</option>
+              <option value="3inch">3 inch</option>
+              <option value="4inch">4 inch</option>
+            </select>
+             
+            <input type="hidden" id="hiddenheight_inch" name="hiddenheight_inch">
+            <div data-height_inch></div>
+          </div>
+        </div>
+
+        <div class="Width_measure">
+          <div class="Width_measure_feet values_in_line">
+            <label for="width">Choose a width:</label>
+            <select name="width" id="width" data-width-feet-main>
+              <option value="1feet">1 feet</option>
+              <option value="2feet">2 feet</option>
+              <option value="3feet">3 feet</option>
+              <option value="4feet">4 feet</option>
+            </select>
+             
+            <input type="hidden" id="hiddenwidth" name="hiddenwidth">
+            <div data-width></div>
+          </div>
+          <div class="values_in_line">
+            <label for="width_inch" > inch:</label>
+            <select name="width_inch" id="width_inch" data-width-inch-main>
+              <option value="1inch">1 inch</option>
+              <option value="2inch">2 inch</option>
+              <option value="3inch">3 inch</option>
+              <option value="4inch">4 inch</option>
+            </select>
+             
+            <input type="hidden" id="hiddenwidth_inch" name="hiddenwidth_inch">
+            <div data-width_inch></div>
+          </div>
+        </div>
+
+        <script>
+          function updateHiddenInput() {
+            let heightSelect = document.getElementById('height');
+            let hiddenHeightInput = document.getElementById('hiddenheight');
+            hiddenHeightInput.value = heightSelect.value;
+            console.log('Selected height: ' + hiddenHeightInput.value);
+            let heightDiv = document.querySelector('[data-height]');
+            heightDiv.innerHTML = hiddenHeightInput.value;
+
+            let heightInchSelect = document.getElementById('height_inch');
+            let hiddenHeightInchInput = document.getElementById('hiddenheight_inch');
+            hiddenHeightInchInput.value = heightInchSelect.value;
+            console.log('Selected height inch: ' + hiddenHeightInchInput.value);
+            let heightInchDiv = document.querySelector('[data-height_inch]');
+            heightInchDiv.innerHTML = hiddenHeightInchInput.value;
+
+            let widthSelect = document.getElementById('width');
+            let hiddenWidthInput = document.getElementById('hiddenwidth');
+            hiddenWidthInput.value = widthSelect.value;
+            console.log('Selected width: ' + hiddenWidthInput.value);
+            let widthDiv = document.querySelector('[data-width]');
+            widthDiv.innerHTML = hiddenWidthInput.value;
+
+            let widthInchSelect = document.getElementById('width_inch');
+            let hiddenWidthInchInput = document.getElementById('hiddenwidth_inch');
+            hiddenWidthInchInput.value = widthInchSelect.value;
+            console.log('Selected width inch: ' + hiddenWidthInchInput.value);
+            let widthInchDiv = document.querySelector('[data-width_inch]');
+            widthInchDiv.innerHTML = hiddenWidthInchInput.value;
+          }
+
+          const heightFeetSelect = document.querySelector('[data-height-feet-main]');
+          const heightInchSelect = document.querySelector('[data-height-inch-main]');
+          const widthFeetSelect = document.querySelector('[data-width-feet-main]');
+          const widthInchSelect = document.querySelector('[data-width-inch-main]');
+
+          heightFeetSelect.addEventListener('change', updateHiddenInput);
+          heightInchSelect.addEventListener('change', updateHiddenInput);
+          widthFeetSelect.addEventListener('change', updateHiddenInput);
+          widthInchSelect.addEventListener('change', updateHiddenInput);
+        </script>
+
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
