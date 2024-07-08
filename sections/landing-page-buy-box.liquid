@@ -1,6 +1,208 @@
+{% assign section_settings = section.settings %}
+{% assign blocks = section.blocks %}
+{% assign product = section.product
+  | default: all_products['medical-grade-liposomal-turmeric-curcumin-supplement-60ct-capsules']
+%}
+{% assign images = product.metafields.custom.landing_pages_images.value | default:product.images %}
+
+{{ 'landing-page-buy-box.css' | asset_url | stylesheet_tag }}
+
+<section class="landing-page-buy-box">
+  <div class="landing-page-buy-box__wrapper">
+    <div class="landing-page-buy-box__gallery ">
+      {% assign carousel_data = '' %}
+      {% assign banner_carousel = '' %}
+      {% assign thumbnail_carousel = '' %}
+
+      {% for media in images %}
+        {% capture content_div %}
+            {% render 'shopify-responsive-image', 
+              image: {{media}}, 
+              aspect_ratio: 1, 
+              image_class: 'product-gallery__image',
+              cover: true
+            %}
+            <div class="zoom-container" data-zoom-container>
+              <img src="{{ media | img_url: '1800x' }}" alt="{{ media_alt | escape }}">
+            </div>
+        {% endcapture %}
+
+        {% capture thumbnail_content_div %}
+                  {% render 'shopify-responsive-image', 
+                    image: {{media}}, 
+                    aspect_ratio: 1, 
+                    cover: true
+                  %}
+                  <noscript>
+                    <img src="{{ media | img_url: '800x' }}" alt="{{ media_alt | escape }}">
+                  </noscript>
+                {% endcapture %}
+        {% capture slide_data %}
+                    {% unless carousel_data.size > 0 %}::carousel_item{% endunless %}
+                        <div class="swiper-slide" data-zoom>
+                            {{ content_div }}
+                        </div>
+                    {% endcapture %}
+
+        {% capture thumbnail_data %}
+                    {% unless carousel_data.size > 0 %}::carousel_item{% endunless %}
+                        <div class="swiper-slide">
+                            {{ thumbnail_content_div }}
+                      </div>
+                    {% endcapture %}
+
+        {% assign carousel_data = carousel_data | append: slide_data %}
+        {% assign banner_carousel = banner_carousel | append: slide_data %}
+        {% assign thumbnail_carousel = thumbnail_carousel | append: thumbnail_data %}
+      {% endfor %}
+      <div class="landing-page-main-product__carousel">
+        <div class="landing-page-main-product__thumbnail-carousel--desktop" data-parent>
+          <custom-carousel>
+            {% render 'custom-carousel', slider_content: thumbnail_carousel %}
+            <script type="text/json" data-settings>
+              {
+                "spaceBetween": 10,
+                "slidesPerView": 3,
+                "name": "product-thumbnail-carousel--desktop",
+                "pagination": false,
+                "navigation": false,
+                "direction": "vertical",
+                "freeMode": true,
+                "freeModeSticky": true,
+                "mousewheel": true
+              }
+            </script>
+            <div class="swiper-navigations" data-swiper-navigations></div>
+          </custom-carousel>
+        </div>
+        <div class="landing-page-main-product__main-carousel product-gallery__carousel-item" data-parent  data-zoom-parent>
+          <custom-carousel>
+            {% render 'custom-carousel', slider_content: banner_carousel %}
+            <script type="text/json" data-settings>
+              {
+                "slidesPerView": 1,
+                "spaceBetween": 10,
+                "navigation": true,
+                "overflowNagivation": true,
+                "scrollBar": true,
+                "name": "product-main-carousel",
+                "breakpoints": {
+                  "1024": {
+                    "slidesPerView": 1,
+                    "scrollBar": false,
+                    "linked": "product-thumbnail-carousel--desktop"
+                  }
+                }
+              }
+            </script>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-navigations" data-swiper-navigations></div>
+            <div class="swiper-scrollbar"></div>
+          </custom-carousel>
+        </div>
+      </div>
+    </div>
+    <div class="landing-page-buy-box-wrapper">
+      <div class="landing-page-buy-box__header">
+        <div class="landing-page-buy-box__title">{{ section_settings.heading }}</div>
+        <div class="landing-page-buy-box__subtext">
+          {{ section_settings.description | default: 'Medical Grade Liposomal Turmeric' }}
+        </div>
+      </div>
+ 
+        <star-reviews>
+           <script type="text/json" id="product-data">
+             {
+               "data": {
+                  "productId": "{{product.id}}"
+                }
+             }
+           </script>
+        </star-reviews>
+
+      <div class="landing-page-buy-box__description-list">
+        {% for block in blocks %}
+          <div class="landing-page-buy-box__desc-item">
+            <span class="landing-page-buy-box__desc-icon">
+              <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 7.75C0 3.89453 3.11719 0.75 7 0.75C10.8555 0.75 14 3.89453 14 7.75C14 11.6328 10.8555 14.75 7 14.75C3.11719 14.75 0 11.6328 0 7.75ZM10.1445 6.54688C10.4453 6.24609 10.4453 5.78125 10.1445 5.48047C9.84375 5.17969 9.37891 5.17969 9.07812 5.48047L6.125 8.43359L4.89453 7.23047C4.59375 6.92969 4.12891 6.92969 3.82812 7.23047C3.52734 7.53125 3.52734 7.99609 3.82812 8.29688L5.57812 10.0469C5.87891 10.3477 6.34375 10.3477 6.64453 10.0469L10.1445 6.54688Z" fill="#3D1327"/>
+              </svg>
+            </span>
+            <div class="landing-page-buy-box__desc-text">
+              {{ block.settings.description }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {% capture settings %} 
+      wrapperClass:"landing-page-buy-box",
+      descriptionType: "minimal",
+      singleSelectorType: "alternate",
+      variantSelectorType: "dropdown"
+    {% endcapture %}
+
+    {% assign settings = settings | strip_newlines | strip %}
+
+    <custom-buy-box>
+      <script id="product-data" type="text/json">
+        {
+          "data": {%  render 'JSON-output-buybox-data', product: product, settings: settings %}
+        }
+      </script>
+    </custom-buy-box>
+    </div>
+
+  </div>
+
+  <div class="gold-timeline">
+    <svg
+      id="gold-atf-line"
+      class="gold-timeline__line2"
+      viewBox="0 0 10 10"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line class="line" stroke-width="1px" x1="0" y1="0" x2="0" y2="10" />
+    </svg>
+  </div>
+</section>
+
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Buy box",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "select product"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "description",
+      "name": "Description",
+      "settings": [
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description List"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Buy box"
+    }
+  ]
+}
 {% endschema %}
