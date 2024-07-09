@@ -19,5 +19,11 @@
       <div class="gold-liposomes__desc is-hidden-mobile-only" data-gsap-fade-in>
         {{ section.paragraph_desktop }} </div>
     </div>
+    <div class="gold-liposomes__image is-hidden-mobile-only"> 
+      <!-- @todo: add mobile image -->
+      <!-- <img src="{{ 'gold-cap-v2-liposome.jpg'| asset_img_url: '870x' }}" width="652" height="510" class="" loading="lazy" alt="Product picture"> -->
+      {% render 'shopify-responsive-image', image: section.image_with_text_image, aspect_ratio: 1.15 %}
+     
+    </div>
   </div>
 </section>
