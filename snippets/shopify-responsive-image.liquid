@@ -1,0 +1,46 @@
+{%- comment -%}
+    It creates a style tag and it restricts an image from growing larger than its max resolution.
+
+    Dependencies:
+    - Lazysizes plugin (https://github.com/aFarkas/lazysizes) which enable responsive image with faster load time and better performance.
+    - Lazysizes Responsive Images as a Service (https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/rias) To load the correct image size with our CDN
+    - Lazysizes Bgset (https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/bgset) To use responsive images on background-image (CSS)
+
+    Accepts:
+    - max_width: {Number} Max width of the image container
+    - max_height: {Number} Max height of the image container
+    - image: {Object} Image object
+    - image_class: {String} class name of the <img />
+    - image_attributes: {String}  additional HTML attributes of the <img />
+    - wrapper_class: {String} class name of the <div> wrapper
+    - wrapper_attributes: {String} additional HTML attributes of the <div> wrapper
+
+    Usage:
+    In your liquid template file, copy the following line
+    - {% include 'responsive-image' with image: featured_image, image_class: "css-class", wrapper_class: "wrapper-css-class", max_width: 700, max_height: 800 %}
+{%- endcomment -%}
+{% if no_lazyload %}
+{%- assign default_image_url =  image | img_url: '1200x'-%}
+{% else %}
+{%- assign default_image_url =  image | img_url: '1x'-%}
+{%endif %}
+{%- assign noscript_image_url = image | img_url: '2048x2048' -%}
+ {% assign image_aspect_ratio = aspect_ratio | default: image.aspect_ratio %}
+{% render 'responsive-image-lazyload',
+    max_width: max_width,
+    max_height: max_height,
+    image_id: image.id,
+    lazy_image_url: lazy_image_url,
+    default_image_url: default_image_url,
+    noscript_image_url: noscript_image_url,
+    image_aspect_ratio: image_aspect_ratio,
+    image_class: image_class,
+    image_attributes: image_apttributes,
+    wrapper_class: wrapper_class,
+    crop: crop | default: false,
+    fill: fill | default: false,
+    background: background | default: false,
+    contain: contain | default: false,
+    lazyload: lazyload,    
+    wrapper_attributes: wrapper_attributes,
+    image: image %}
