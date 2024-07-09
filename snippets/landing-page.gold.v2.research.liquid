@@ -1,0 +1,45 @@
+<section class="gold-research" id="gold-research">
+  <header class="gold-research__header">
+    <div class="gold-timeline gold-timeline--dark">
+      <svg id="gold-research-header-line" class="gold-timeline__line2" viewBox="0 0 10 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <line class="line" stroke-width="1px" x1="0" y1="0" x2="0" y2="10" />
+      </svg>
+    </div>
+   {% if section_settings.title != empty %} <h3 class="gold-lp__pill-header" data-gsap-fade-in>{{ section_settings.title }}</h3> {% endif %}
+  </header>
+  <div class="gold-research__wrapper">
+  {% for block in section_block %}
+    {% assign block_settings = block.settings %}
+    <div class="gold-timeline gold-timeline--dark">
+      <svg id="gold-research-line" class="gold-timeline__line2" viewBox="0 0 10 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <line class="line" stroke-width="1px" x1="0" y1="0" x2="0" y2="10" />
+      </svg>
+    </div>
+    <!-- item #1 -->
+    <div class="gold-research__item" data-gsap-fade-in>
+      <div class="gold-research__item-content">
+        <h2 class="gold-research__item-title  {% unless forloop.first %} gold-research__item-title--mobile-no-border {% endunless %}">{{ block_settings.heading }}</h2>
+        <div class="gold-research__item-desc">
+        <div class="{% unless forloop.first %}is-hidden-mobile-only {% endunless %}"> {{ block_settings.paragraph }} </div>
+        {% unless forloop.first %}
+         <button class="gold-research__accordion-button-mobile is-visible-mobile" data-gold-accordion-button-mobile data-gsap-fade-in>
+          <div class="gold-research__accordion-button-mobile-wrapper">
+            <span class="gold-research__accordion-button-mobile-label" data-gold-accordion-button-mobile-label>Learn more</span>
+            <div class="gold-research__accordion-button-mobile-content gold-research__item-desc" style="display: none;" data-gold-accordion-button-mobile-content>
+              {{ block_settings.paragraph }}
+            </div>
+          </div>
+          <i class="expand-icon closed"></i>
+        </button>
+        {% endunless %}
+        </div>
+      </div>
+      <div class="gold-research__image">
+      {% render 'shopify-responsive-image', image: block_settings.img, aspect_ratio: 1.28 %}
+        <!-- <img data-src="{{ 'gold-cap-v2-research-2.jpg'| asset_img_url: '850x' }}" width="570" height="444" class="lazy2" alt="Balances the body&apos;s inflammatory response." /> -->
+    {% if block_settings.image_bottom_text != empty %}    <span class="gold-research__image-caption">{{ block_settings.image_bottom_text }}</span> {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+</section>
