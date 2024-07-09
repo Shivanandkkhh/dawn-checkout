@@ -20,7 +20,7 @@
     "landing_page_gold_v2_liposomes_hH4MBH": {
       "type": "landing-page-gold-v2-liposomes",
       "settings": {
-        "title": "",
+        "title": "{{ page.metafields.custom.text_with_image.value.heading.value }}",
         "paragraph_desktop": "",
         "paragraph": ""
       }
