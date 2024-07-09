@@ -1,6 +1,40 @@
+{% render 'landing-page.gold.v2.liposomes', section: section.settings %}
+
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Custom text with image",
+  "settings": [
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Why liposomes (nano-encapsulations) are essential for turmeric delivery."
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_desktop",
+      "label": "Paragraph desktop"
+    },
+    {
+        "type": "richtext",
+        "id": "paragraph",
+        "label": "Paragraph mobile"
+    },
+    {
+        "type": "image_picker",
+        "id": "image_with_text_image",
+        "label": "Image desktop"
+    },
+    {
+        "type": "image_picker",
+        "id": "image_with_text_image_mobile",
+        "label": "Image mobile"
+    }            
+  ],
+  "presets":[
+    {
+      "name": "Custom text with image"
+    }
+  ]
+}
 {% endschema %}
