@@ -1,0 +1,168 @@
+{%- comment -%}
+    It creates a style tag and it restricts an image from growing larger than its max resolution.
+
+    Dependencies:
+    - Lazysizes plugin (https://github.com/aFarkas/lazysizes) which enable responsive image with faster load time and better performance.
+    - Lazysizes Responsive Images as a Service (https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/rias) To load the correct image size with our CDN
+    - Lazysizes Bgset (https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/bgset) To use responsive images on background-image (CSS)
+
+    Accepts:
+    - max_width: {Number} Max width of the image container
+    - max_height: {Number} Max height of the image container
+    - image_id: a unique ID for the image
+    - lazy_image_url: {String} the url to lazy load the image (with necessary {width} and/or {height} replacement parameters)
+    - default_image_url: {String} the default image to load before lazy-loading,
+    - noscript_image_url: {String} the image to load when javascript is unavailable,
+    - image_aspect_ratio: {Number} the image aspect ratio,
+    - image_width: {Number} the image width,
+    - image_height: {Number} the image height,
+    - image_alt: {String} the image alt text,
+    - image_class: {String} class name of the <img />
+    - image_attributes: {String}  additional HTML attributes of the <img />
+    - wrapper_class: {String} class name of the <div> wrapper
+    - wrapper_attributes: {String} additional HTML attributes of the <div> wrapper
+
+    Usage:
+    In your liquid template file, copy the following line
+    - {% include 'responsive-image' with image: featured_image, image_class: "css-class", wrapper_class: "wrapper-css-class", max_width: 700, max_height: 800 %}
+{%- endcomment -%}
+{% liquid
+  assign image_width = image.width
+  assign image_height = image.height
+  assign image_alt = image.alt
+%}
+
+{%- comment -%} Added generated number to avoid conflict styling code when the same images are using this snippet {%- endcomment -%}
+{%- assign min = 100 -%}
+{%- assign max = 10000 -%}
+{%- assign diff = max | minus: min -%}
+{%- assign generated_image_id = "now" | date: "%N" | modulo: diff | plus: min -%}
+
+{%- assign max_height = max_height | default: 1900 -%}
+{%- assign max_width = max_width | default: 1900 -%}
+
+<style>
+  {%- comment -%}
+    The image aspect ratio tells us the orientation of the image:
+    - less than 1.0 is portrait
+    - exactly 1.0 is square
+    - greater than 1.0 is landscape
+  {%- endcomment -%}
+
+
+  {%- if image_aspect_ratio <= 1 -%}
+    {%- assign max_height_image = image_height | at_most: max_height -%}
+    {%- assign max_width_image = max_height_image | times: image_aspect_ratio -%}
+  {%- else -%}
+    {%- if image_width > 1280 -%}
+      {%- comment -%} If we have a really big image, assume that it's a hero image that needs to be fullscreen {%- endcomment -%}
+      {%- assign max_width_image = max_width -%}
+    {%- else -%}
+      {%- assign max_width_image = image_width | at_most: max_width -%}
+    {%- endif -%}
+    {%- assign max_height_image = max_width_image | divided_by: image_aspect_ratio  -%}
+  {%- endif -%}
+
+  {%- assign max_width_image_float = max_width_image | times: 1.0  -%}
+
+  #Image-{{ image_id }}-{{ generated_image_id }} {
+    position: absolute;
+    top:0;
+    height:100%;
+    left:0;
+    width: 100%;
+  }
+
+  {% if crop == true %}
+    #Image-{{ image_id }}-{{ generated_image_id }} {
+      object-fit: cover;
+    }
+  {% endif %}
+
+  {% if fill == true %} 
+    #Image-{{ image_id }}-{{ generated_image_id }} {
+      object-fit: fill;
+    }
+  {% endif %}
+
+  {% if background == true %} 
+    #Image-{{ image_id }}-{{ generated_image_id }} {
+      background-color:#fff;
+    }
+  {% endif %}
+
+
+  {% if contain == true %} 
+    #Image-{{ image_id }}-{{ generated_image_id }} {
+      object-fit: contain;
+    }
+  {% endif %}
+
+
+  #ImageWrapper-{{ image_id }}-{{ generated_image_id }} {
+    position: relative;
+    max-width: {{ max_width_image }}px;
+    max-height: {{ max_height_image  | at_most: max_height }}px;
+  }
+
+  #ImageWrapper-{{ image_id }}-{{ generated_image_id }}::before {
+    {%- comment -%}
+      When you change the window screen width, we want to make sure that the container's size is proportionally calculated.
+      Note regarding padding percentage: The percentage is calculated with respect to the width of the generated box's containing block (source: http://www.w3.org/TR/2011/REC-CSS2-20110607/box.html#padding-properties)
+    {%- endcomment -%}
+    content: '';
+    width: 100%;
+    object-fit: cover;
+    {% comment %} background: transparent; {% endcomment %}
+    display: block;
+    padding-top:{{ max_height_image | divided_by: max_width_image_float | times: 100}}%;
+  }
+</style>
+
+{%- comment -%} Limit image widths to valid options based on image_width {%- endcomment -%}
+{%- assign image_widths_default = '180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024' | split: ',' -%}
+
+{%- capture image_widths -%}
+  {%- for width in image_widths_default -%}
+    {%- comment -%} Check if image width is less or equal to width {%- endcomment -%}
+    {%- assign width_num = width | plus: 0 | round -%}
+    {%- if image_width >= width_num -%}
+      {{ width_num  | at_most: 3024 }},
+    {%  else %}
+      {{ image_width | at_most: 1920}},
+      {% break %}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+
+{%- assign image_widths = image_widths | split:',' -%}
+{%- capture srcset -%}
+  {%- for width in image_widths -%} 
+    {%- assign width_number = width | plus: 0 | at_least: 1 | at_most: 3016 -%}
+    {%- if image.width >= width_number -%}
+      {{ image | image_url: width: width_number }} {{ width_number }}w,
+    {% else %}
+      {%- break -%}
+    {%- endif -%}
+    {% endfor %}
+{%- endcapture -%}
+
+<div id="ImageWrapper-{{ image_id }}-{{ generated_image_id }}" data-image-id="{{ image_id }}" class="responsive-image__wrapper {{ wrapper_class }}" {{ wrapper_attributes }}>
+  <img id="Image-{{ image_id }}-{{ generated_image_id }}"
+    class="responsive-image__image {{ image_class }}"
+    image-width = "{{ image_widths}}",
+    src="{{ default_image_url }}"
+    srcset="{{ srcset }}"
+    data-aspectratio="{{ image_aspect_ratio }}"
+    data-sizes="auto"
+    tabindex="-1"   
+    alt="{{ image_alt | escape }}"
+    {{ image_attributes }}
+    loading="lazy"
+  >
+</div>
+
+<noscript>
+  <img class="{{ image_class }}" src="{{ noscript_image_url }}" alt="{{ image_alt | escape }}">
+</noscript>
