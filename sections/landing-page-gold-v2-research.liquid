@@ -1,0 +1,50 @@
+{% render 'landing-page.gold.v2.research' , section_settings: section.settings, section_block:section.blocks%}
+
+{% schema %}
+{
+  "name": "Research information",
+  "settings": [ 
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+    }        
+  ],
+  "blocks": [
+    {
+      "type": "image_text_blocks",
+      "name": "Image text blocks",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Biochemist developed" 
+        },
+        {
+          "type": "richtext",
+          "id": "paragraph",
+          "label": "Paragraph"
+        },    
+        {
+            "type": "image_picker",
+            "id": "img",
+            "label": "Image"
+        }, 
+        {
+          "type": "text",
+          "id": "image_bottom_text",
+          "label": "Image text",
+          "default": "Biochemist developed" 
+        } 
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "Research information"
+    }
+  ]
+  
+}
+{% endschema %}
