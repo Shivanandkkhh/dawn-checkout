@@ -1,0 +1,22 @@
+<section class="gold-productcta">
+  <div class="gold-timeline gold-timeline--dark">
+    <svg id="gold-productcta-line" class="gold-timeline__line2" viewBox="0 0 10 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line class="line" stroke-width="1px" x1="0" y1="0" x2="0" y2="10" />
+    </svg>
+    <div class="gold-timeline__label" data-gsap-fade-in>
+      <i class="gold-timeline__label-icon fa fa-arrow-left"></i>
+      <a href="{{ section_settings.button_link }}" class="gold-timeline__label-text">{{ section_settings.button_text }}</a>
+    </div> 
+  </div>
+  <div class="gold-productcta__wrapper">
+    <div class="gold-productcta__content">
+      <h1 class="gold-productcta__title" data-gsap-fade-in>{{ section_settings.heading }}</h1>
+      <a role="button" href="{{ section_settings.shop_button_text_url }}" class="gold-productcta__cta" data-gsap-fade-in>
+        <div class="a--cta">{{ section_settings.shop_button_text }}</div>
+      </a>
+    </div>
+    <div class="gold-productcta__image is-hidden-mobile-only"> {% render 'shopify-responsive-image', image: section_settings.text_with_image, aspect_ratio: 1.62 %}</div>
+    <div class="gold-productcta__image is-visible-mobile">  {% render 'shopify-responsive-image', image: section_settings.text_with_image_mob, aspect_ratio: 1.43 %} </div>
+  </div>
+
+</section>
