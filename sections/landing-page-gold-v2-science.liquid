@@ -1,0 +1,80 @@
+ {% style %}
+{% comment %} {% for block in section.blocks %}
+.gold-science__card-image.no-float.is-hidden-mobile-only{
+    background-image: url({% render 'shopify-responsive-image' , image: block.settings.image_desktop ,  aspect_ratio: 1 %});
+}
+ {% endfor %} {% endcomment %}
+
+@media(min-width: 855px){
+    .gold-science__slide.row-reverse {
+        grid-template-areas: "item2 item1"
+    }
+
+    .gold-science__slide.row {
+        grid-template-areas: "item1 item2"
+    }
+
+    .gold-science__slide .item1{
+        grid-area: item1;
+    }
+
+    .gold-science__slide .item2{
+        grid-area: item2;
+    }
+}
+{% endstyle %} 
+
+{% render 'landing-page.gold.v2.science', block_data: section.blocks %}
+
+{% schema %}
+{
+  "name": "Text image information",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headings",
+      "label": "Headings",
+      "default": "Why liposomes (nano-encapsulations) are essential for turmeric delivery."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image-and-text",
+      "name": "image and text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading_text",
+          "label": "Title"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "richtext",
+            "id": "paragraph",
+            "label": "Paragraph"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_desktop",
+            "label": "Image desktop"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image mobile"
+        }                  
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text image information",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
