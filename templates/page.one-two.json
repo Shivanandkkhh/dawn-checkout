@@ -30,11 +30,13 @@
     "landing_page_gold_v2_product_cta_9nVr8m": {
       "type": "landing-page-gold-v2-product-cta",
       "settings": {
-        "heading": "Biochemist developed. Powered by cutting-edge nutritional science.",
-        "shop_button_text": "Shop Now",
-        "shop_button_text_url": "",
-        "button_text": "Learn more",
-        "button_link": ""
+        "heading": "{{ page.metafields.custom.product_infromation.value.heading.value }}",
+        "shop_button_text": "{{ page.metafields.custom.product_infromation.value.button_text.value }}",
+        "shop_button_text_url": "{{ page.metafields.custom.product_infromation.value.button_url.value }}",
+        "text_with_image": "{{ page.metafields.custom.product_infromation.value.image.value }}",
+        "text_with_image_mob": "{{ page.metafields.custom.product_infromation.value.image_mobile.value }}",
+        "button_text": "{{ page.metafields.custom.product_infromation.value.learn_button_text.value }}",
+        "button_link": "{{ page.metafields.custom.product_infromation.value.learn_button_url.value }}"
       }
     }
   },
