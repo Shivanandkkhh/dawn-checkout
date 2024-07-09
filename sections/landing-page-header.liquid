@@ -1,0 +1,40 @@
+{{ 'landing-page-header.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-page-header">
+  <a class="landing-page-header__logo" href="{{ section.settings.logo_url }}"> 
+       <img src="{{ section.settings.logo_image | image_url }}" width="131" height="20">
+    </a>
+    <button class="landing-page-header__btn" data-buy-now-button>{{ section.settings.title }}</button>
+</div>
+
+
+{% schema %}
+{
+  "name": "landing page header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image"
+    },
+    {
+      "type": "url",
+      "id": "logo_url",
+      "label": "Logo url",
+      "default": "/"
+    },    
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Button text",
+        "default": "Buy text"
+    }          
+  ],
+  "presets":[
+    {
+      "name": "landing page header"
+    }
+  ]
+  
+}
+{% endschema %}
