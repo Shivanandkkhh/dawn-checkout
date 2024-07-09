@@ -1,0 +1,53 @@
+{% render 'landing-page.gold.v2.product-cta' , section_settings: section.settings %}
+
+{% schema %}
+{
+  "name": "Product information cta",
+  "settings": [ 
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Biochemist developed. Powered by cutting-edge nutritional science." 
+    },
+    {
+        "type": "text",
+        "id": "shop_button_text",
+        "label": "Shop button text",
+        "default": "Shop Now"  
+    },
+    {
+        "type": "url",
+        "id": "shop_button_text_url",
+        "label": "Button link"
+    },
+    {
+        "type": "image_picker",
+        "id": "text_with_image",
+        "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "text_with_image_mob",
+      "label": "Image mobile"
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "Learn more" 
+    },
+    {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+    },                 
+  ],
+  "presets":[
+    {
+      "name": "Product information cta"
+    }
+  ]
+  
+}
+{% endschema %}
