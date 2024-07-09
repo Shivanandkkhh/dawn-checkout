@@ -23,10 +23,21 @@
         "paragraph_desktop": "",
         "paragraph": ""
       }
+    },
+    "landing_page_gold_v2_product_cta_9nVr8m": {
+      "type": "landing-page-gold-v2-product-cta",
+      "settings": {
+        "heading": "Biochemist developed. Powered by cutting-edge nutritional science.",
+        "shop_button_text": "Shop Now",
+        "shop_button_text_url": "",
+        "button_text": "Learn more",
+        "button_link": ""
+      }
     }
   },
   "order": [
     "main",
-    "landing_page_gold_v2_liposomes_hH4MBH"
+    "landing_page_gold_v2_liposomes_hH4MBH",
+    "landing_page_gold_v2_product_cta_9nVr8m"
   ]
 }
