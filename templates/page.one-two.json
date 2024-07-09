@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
@@ -19,7 +20,7 @@
     "landing_page_gold_v2_liposomes_hH4MBH": {
       "type": "landing-page-gold-v2-liposomes",
       "settings": {
-        "title": "{{ page.metafields.custom.text_with_image.value.heading.value }}",
+        "title": "kfjioegj",
         "paragraph_desktop": "{{ page.metafields.custom.text_with_image.value.paragraph | metafield_tag }}",
         "paragraph": "{{ page.metafields.custom.text_with_image.value.paragraph_mobile | metafield_tag }}",
         "image_with_text_image": "{{ page.metafields.custom.text_with_image.value.image_desktop.value }}",
