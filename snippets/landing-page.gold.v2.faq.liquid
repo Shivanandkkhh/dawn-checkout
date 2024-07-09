@@ -1,0 +1,34 @@
+<section class="gold-faq">
+  <h3 class="gold-lp__pill-header">{{ section_settings.heading }}</h3>
+  <div class="gold-faq__wrapper">
+    <ul class="gold-faq__items">
+      {% assign even_items = "" %}
+      {% assign odd_items = "" %}
+      {% for block in block_settings %}
+        {% assign block_setting = block.settings %}
+        {% assign loop = forloop.index %}
+        {% assign index = loop | modulo: 2 %}
+        {% capture item %}
+          <li class="gold-faq__item" data-gold-accordion>
+            <button class="gold-faq__item-title" data-gold-accordion-button>
+              <span>{{ block_setting.title }}</span>
+              <i class="expand-icon closed"></i>
+            </button>
+            <div class="gold-faq__item-content" style="display: none;" data-gold-accordion-content>
+              {{ block_setting.paragraph }}
+            </div>
+          </li>
+        {% endcapture %}
+        {% if index == 0 %}
+          {% assign even_items = even_items | append: item %}
+        {% else %}
+          {% assign odd_items = odd_items | append: item %}
+        {% endif %}
+      {% endfor %}
+      {{ odd_items }}
+    </ul>
+    <ul class="gold-faq__items">
+      {{ even_items }}
+    </ul>
+  </div>
+</section>
