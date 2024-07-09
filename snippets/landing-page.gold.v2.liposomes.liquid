@@ -1,0 +1,29 @@
+<section class="gold-liposomes" id="section-liposome">
+  <div class="gold-timeline gold-timeline--dark">
+    <svg id="gold-liposomes-line" class="gold-timeline__line2" viewBox="0 0 10 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line class="line" stroke-width="1px" x1="0" y1="0" x2="0" y2="10" />
+    </svg>
+  </div>
+  <div class="gold-liposomes__wrapper">
+    <div class="gold-liposomes__content">
+      <div class="gold-liposomes__title-wrapper">
+        <h1 class="gold-liposomes__title" data-gsap-fade-in>{{ section.title }}</h1>
+        <div class="gold-liposomes__image is-visible-mobile">
+          <!-- @todo: add mobile image -->
+          {% render 'shopify-responsive-image', image: section.image_with_text_image_mobile, aspect_ratio: 1.38 %}
+          <!-- <img data-src="{{ 'gold-cap-v2-liposome.jpg'| asset_img_url: '600x' }}" width="652" height="510" class="lazy2" alt="Product picture"> -->
+        </div>
+        <div class="gold-liposomes__desc is-visible-mobile" data-gsap-fade-in>
+          {{ section.paragraph }} </div>
+      </div>
+      <div class="gold-liposomes__desc is-hidden-mobile-only" data-gsap-fade-in>
+        {{ section.paragraph_desktop }} </div>
+    </div>
+    <div class="gold-liposomes__image is-hidden-mobile-only"> 
+      <!-- @todo: add mobile image -->
+      <!-- <img src="{{ 'gold-cap-v2-liposome.jpg'| asset_img_url: '870x' }}" width="652" height="510" class="" loading="lazy" alt="Product picture"> -->
+      {% render 'shopify-responsive-image', image: section.image_with_text_image, aspect_ratio: 1.15 %}
+     
+    </div>
+  </div>
+</section>
