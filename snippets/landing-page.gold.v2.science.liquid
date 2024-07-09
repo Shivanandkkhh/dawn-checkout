@@ -1,0 +1,56 @@
+<section class="gold-science" id="section-science">
+  {% for block in block_data %}
+  {% liquid
+     assign  blocks = block.settings 
+     assign  not_first_loop = false
+     if forloop.index != 1 
+      assign not_first_loop = true
+     endif
+    
+  %}
+
+  <div class="gold-science__slide  {% cycle 'row', 'row-reverse'%}" {% unless forloop.first %} data-gold-accordion {% endunless %}>
+    <div class="gold-science__card-text gold-science__card-text--green item1">
+      <div class="gold-timeline">
+        <svg id="gold-science-line" class="gold-timeline__line2" viewBox="0 0 10 10" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <line class="line" stroke-width="1px" x1="0" y1="0" x2="0" y2="10" />
+        </svg>
+      </div>
+   {% if blocks.heading_text !=empty %}   <h3 class="gold-lp__pill-header gold-lp__pill-header--white"  >{{ blocks.heading_text }}</h3> {% endif %}
+      <div class="gold-science__card-content">
+        <h1 class="gold-science__card-title gold-science__card-title--first-title"  >
+         {{ blocks.heading }}
+        </h1>
+        <div class="gold-science__card-description is-hidden-mobile-only"  >
+       {% if forloop.first %}   {{ blocks.paragraph }} {% endif %}
+        </div>
+        {% unless forloop.first %}
+        <button class="gold-science__accordion-button-mobile" data-gold-accordion-button-mobile  >
+          <div class="gold-science__accordion-button-mobile-wrapper">
+            <span class="gold-science__accordion-button-mobile-label" data-gold-accordion-button-mobile-label>Learn more</span>
+            <div class="gold-science__accordion-button-mobile-content" style="display: none;" data-gold-accordion-button-mobile-content>
+              <div class="gold-science__accordion-button-mobile-paragraph">
+                {{ blocks.paragraph }}
+              </div>
+            </div>
+          </div>
+          <i class="expand-icon closed"></i>
+        </button>
+        {% endunless %}
+      </div>
+    </div>
+    <div class="gold-science__card-image no-float is-hidden-mobile-only {% if forloop.first %} no-animation-image {% else %} animation-image {% endif %} "   style="display: unset;">{% render 'shopify-responsive-image', image: blocks.image_desktop, aspect_ratio: 1.10, contain: not_first_loop %}</div>
+      <div class="gold-science__card-image no-float is-visible-mobile {% if forloop.first %} no-animation-image {% else %} animation-image {% endif %}" style="display: unset;">{% render 'shopify-responsive-image', image: blocks.image_mobile, aspect_ratio: 1.4, contain: not_first_loop %}</div>
+      <!-- <img class="is-hidden-mobile-only" src="{{ 'gold-cap-v2-co2.jpg' | asset_url }}" alt="BioHyaluronic compound diagram">
+      <img class="is-visible-mobile" src="{{ 'gold-cap-v2-co2-mobile.jpg' | asset_url }}" alt="BioHyaluronic compound diagram"> -->
+
+
+    <div class="gold-science__card-content gold-science__card-content--alternate is-visible-mobile">
+      <div class="gold-science__card-description">
+        {{ blocks.paragraph }}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</section>
+
