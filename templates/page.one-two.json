@@ -20,9 +20,9 @@
     "landing_page_gold_v2_liposomes_hH4MBH": {
       "type": "landing-page-gold-v2-liposomes",
       "settings": {
-        "title": "{{ page.metafields.custom.text_with_image.value.heading.value }}",
-        "paragraph_desktop": "<p>{{ page.metafields.custom.text_with_image.value.paragraph | metafield_tag }}<\/p>",
-        "paragraph": "<p>{{ page.metafields.custom.text_with_image.value.paragraph_mobile | metafield_tag }}<\/p>"
+        "title": "",
+        "paragraph_desktop": "",
+        "paragraph": ""
       }
     },
     "landing_page_gold_v2_product_cta_9nVr8m": {
