@@ -19,9 +19,11 @@
     "landing_page_gold_v2_liposomes_hH4MBH": {
       "type": "landing-page-gold-v2-liposomes",
       "settings": {
-        "title": "Why liposomes (nano-encapsulations) are essential for turmeric delivery.",
-        "paragraph_desktop": "",
-        "paragraph": ""
+        "title": "{{ page.metafields.custom.text_with_image.value.heading.value }}",
+        "paragraph_desktop": "{{ page.metafields.custom.text_with_image.value.paragraph | metafield_tag }}",
+        "paragraph": "{{ page.metafields.custom.text_with_image.value.paragraph_mobile | metafield_tag }}",
+        "image_with_text_image": "{{ page.metafields.custom.text_with_image.value.image_desktop.value }}",
+        "image_with_text_image_mobile": "{{ page.metafields.custom.text_with_image.value.image_mobile.value }}"
       }
     },
     "landing_page_gold_v2_product_cta_9nVr8m": {
