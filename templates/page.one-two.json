@@ -44,28 +44,18 @@
       "blocks": {
         "image_and_text_XiwMym": {
           "type": "image-and-text",
+          "repeater": "{{ page.metafields.custom.text_image_infromation.value }}",
           "settings": {
-            "heading_text": "{{ page.metafields.custom.text_image_infromation | metafield_text: field: 'title' }}",
-            "heading": "{{ page.metafields.custom.text_image_infromation | metafield_text: field: 'heading' }}",
-            "paragraph": "",
-            "image_desktop": "shopify:\/\/shop_images\/red-cocktail-dress.jpg",
-            "image_mobile": "shopify:\/\/shop_images\/ladies-white-t-shirt.jpg"
-          }
-        },
-        "image_and_text_yjQfX6": {
-          "type": "image-and-text",
-          "settings": {
-            "heading_text": "",
-            "heading": "ds valuable in restoring inflammation bal",
-            "paragraph": "<p>Turmeric contains several beneficial bioactive compounds valuable in restoring inflammation balance and aiding healing. Unfortunately, 99% of turmeric formulas use inexpensive powder extracts that contain only one compound, severely limiting their efficacy.<br\/><\/p><p>The whole-root CO2 oil extraction we use in Gold contains the full suite of turmeric's beneficial bioactive compounds, delivered via the cleanest and most potent extraction technology available.<br\/>        <\/p>",
-            "image_desktop": "shopify:\/\/shop_images\/lace-detailed-womens-top.jpg",
-            "image_mobile": "shopify:\/\/shop_images\/pink-floral-outfit.jpg"
+            "heading_text": "{{ block.repeater.heading.value }}",
+            "heading": "{{ block.repeater.title.value }}",
+            "paragraph": "{{ block.repeater.paragraph | metafield_tag }}",
+            "image_desktop": "{{ block.repeater.image_desktop.value }}",
+            "image_mobile": "{{ block.repeater.image_mobile.value }}"
           }
         }
       },
       "block_order": [
-        "image_and_text_XiwMym",
-        "image_and_text_yjQfX6"
+        "image_and_text_XiwMym"
       ],
       "settings": {
         "headings": "Why liposomes (nano-encapsulations) are essential for turmeric delivery."
