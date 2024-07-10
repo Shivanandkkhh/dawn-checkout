@@ -46,8 +46,8 @@
           "type": "image-and-text",
           "repeater": "{{ page.metafields.custom.text_image_infromation.value }}",
           "settings": {
-            "heading_text": "{{ block.repeater.heading.value }}",
-            "heading": "{{ block.repeater.title.value }}",
+            "heading_text": "{{ block.repeater.title.value }}",
+            "heading": "{{ block.repeater.heading.value }}",
             "paragraph": "{{ block.repeater.paragraph | metafield_tag }}",
             "image_desktop": "{{ block.repeater.image_desktop.value }}",
             "image_mobile": "{{ block.repeater.image_mobile.value }}"
