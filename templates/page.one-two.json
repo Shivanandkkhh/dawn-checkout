@@ -45,8 +45,8 @@
         "image_and_text_XiwMym": {
           "type": "image-and-text",
           "settings": {
-            "heading_text": "The Science Behind Gold",
-            "heading": "Whole-Root CO2 Oil Extracts deliver all of turmeric's bioactive compounds.",
+            "heading_text": "{{ page.metafields.custom.text_image_infromation | metafield_text: field: 'title' }}",
+            "heading": "{{ page.metafields.custom.text_image_infromation | metafield_text: field: 'heading' }}",
             "paragraph": "<p>Turmeric contains several beneficial bioactive compounds valuable in restoring inflammation balance and aiding healing. Unfortunately, 99% of turmeric formulas use inexpensive powder extracts that contain only one compound, severely limiting their efficacy.<br\/><\/p><p>The whole-root CO2 oil extraction we use in Gold contains the full suite of turmeric's beneficial bioactive compounds, delivered via the cleanest and most potent extraction technology available.<br\/>        <\/p>",
             "image_desktop": "shopify:\/\/shop_images\/red-cocktail-dress.jpg",
             "image_mobile": "shopify:\/\/shop_images\/ladies-white-t-shirt.jpg"
