@@ -52,10 +52,21 @@
             "image_desktop": "{{ block.repeater.image_desktop.value }}",
             "image_mobile": "{{ block.repeater.image_mobile.value }}"
           }
+        },
+        "image_and_text_dJWgfL": {
+          "type": "image-and-text",
+          "settings": {
+            "heading_text": "kdf",
+            "heading": "mnf vnf",
+            "paragraph": "<p>vfnvkfnvk ofjgofd gofg odofdk<br\/>vfnvkfnvk ofjgofd gofg odofdkvfnvkfnvk ofjgofd gofg odofdkvfnvkfnvk ofjgofd gofg odofdkvfnvkfnvk ofjgofd gofg odofdkvfnvkfnvk ofjgofd gofg odofdkvfnvkfnvk ofjgofd gofg odofdk<\/p>",
+            "image_desktop": "shopify:\/\/shop_images\/resting-by-a-window-in-heels.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/boots-against-the-wall.jpg"
+          }
         }
       },
       "block_order": [
-        "image_and_text_XiwMym"
+        "image_and_text_XiwMym",
+        "image_and_text_dJWgfL"
       ],
       "settings": {
         "headings": "Why liposomes (nano-encapsulations) are essential for turmeric delivery."
