@@ -10,23 +10,6 @@
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
 {% endcomment %}
-{% style %}
-.values_in_line{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.Height_measure{
-  border: 1px solid green;
-  padding: 7px;
-  margin: 5px 0 ;
-}
-.Width_measure{
-  border: 1px solid blue;
-  padding: 7px;
-  margin: 5px 0 ;
-}
-{% endstyle %}
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
     {%- liquid
@@ -72,142 +55,14 @@
           type="hidden"
           name="id"
           value="{{ product.selected_or_first_available_variant.id }}"
-          {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+          {% if product.selected_or_first_available_variant.available == false
+            or quantity_rule_soldout
+            or product.selected_or_first_available_variant == nil
+          %}
             disabled
           {% endif %}
           class="product-variant-id"
         >
-        <input
-          type="hidden"
-          name="properties[bundleQuantity]"
-          value=""
-        >
-        <input
-          type="hidden"
-          name="properties[bundleGroupType]"
-          value="unique"
-        >
-        <input
-          type="hidden"
-          name="properties[collectionHandle]"
-          value="kuchVi"
-        >
-        <input
-          type="hidden"
-          name="properties[discountPercentage]"
-          value="20"
-        >
-          <div class="Height_measure">
-            <div class="Height_measure_feet values_in_line">
-              <label for="height">Choose a height:</label>
-              <select name="height" id="height" data-height-feet-main>
-                <option value="1">1 feet</option>
-                <option value="2">2 feet</option>
-                <option value="3">3 feet</option>
-                <option value="4">4 feet</option>
-              </select>
-               
-              <input type="hidden" id="hiddenheight" name="hiddenheight">
-              <div data-height>1 feet</div>
-            </div>
-            {% comment %} <div class="values_in_line">
-              <label for="height_inch"> inch:</label>
-              <select name="height_inch" id="height_inch" data-height-inch-main>
-                <option value="1inch">1 inch</option>
-                <option value="2inch">2 inch</option>
-                <option value="3inch">3 inch</option>
-                <option value="4inch">4 inch</option>
-              </select>
-               
-              <input type="hidden" id="hiddenheight_inch" name="hiddenheight_inch">
-              <div data-height_inch></div>
-            </div> {% endcomment %}
-          </div>
-          <div class="Width_measure">
-            <div class="Width_measure_feet values_in_line">
-              <label for="width">Choose a width:</label>
-              <select name="width" id="width" data-width-feet-main>
-                <option value="1">1 feet</option>
-                <option value="2">2 feet</option>
-                <option value="3">3 feet</option>
-                <option value="4">4 feet</option>
-              </select>
-              <input type="hidden" id="hiddenwidth" name="hiddenwidth">
-              <div data-width>1 feet</div>
-            </div>
-            {% comment %} <div class="values_in_line">
-              <label for="width_inch" > inch:</label>
-              <select name="width_inch" id="width_inch" data-width-inch-main>
-                <option value="1inch">1 inch</option>
-                <option value="2inch">2 inch</option>
-                <option value="3inch">3 inch</option>
-                <option value="4inch">4 inch</option>
-              </select>
-               
-              <input type="hidden" id="hiddenwidth_inch" name="hiddenwidth_inch">
-              <div data-width_inch></div>
-            </div> {% endcomment %}
-          </div>
-          {% assign product_price =  product.selected_or_first_available_variant.price  | money_without_currency %}
-          <div data-price="{{ product_price }}"> </div>
-          <script>
-            function updateHiddenInput() {
-              let heightSelect = document.getElementById('height');
-              let hiddenHeightInput = document.getElementById('hiddenheight');
-              hiddenHeightInput.value = heightSelect.value;
-            let hiddenHeightInputValue =   Number(hiddenHeightInput.value);
-              let heightDiv = document.querySelector('[data-height]');
-              heightDiv.innerHTML = hiddenHeightInput.value;
-              
-             {% comment %} let heightInchSelect = document.getElementById('height_inch');
-  
-              {% comment %} let heightInchSelect = document.getElementById('height_inch');
-              let hiddenHeightInchInput = document.getElementById('hiddenheight_inch');
-              hiddenHeightInchInput.value = heightInchSelect.value;
-              console.log('Selected height inch: ' + hiddenHeightInchInput.value);
-              let heightInchDiv = document.querySelector('[data-height_inch]');
-              heightInchDiv.innerHTML = hiddenHeightInchInput.value; {% endcomment %}
-  
-              let widthSelect = document.getElementById('width');
-              let hiddenWidthInput = document.getElementById('hiddenwidth');
-              hiddenWidthInput.value = widthSelect.value;
-            let hiddenWidthInputvalue  =    Number(hiddenWidthInput.value);
-              let widthDiv = document.querySelector('[data-width]');
-              widthDiv.innerHTML = hiddenWidthInput.value;
-  
-              {% comment %} let widthInchSelect = document.getElementById('width_inch');
-              let hiddenWidthInchInput = document.getElementById('hiddenwidth_inch');
-              hiddenWidthInchInput.value = widthInchSelect.value;
-              console.log('Selected width inch: ' + hiddenWidthInchInput.value);
-              let widthInchDiv = document.querySelector('[data-width_inch]');
-              widthInchDiv.innerHTML = hiddenWidthInchInput.value; {% endcomment %}
-  
-              const productPrice = document.querySelector('[data-price]');
-              const pdpPrice =  productPrice.getAttribute('data-price');
-              const pdpPriceNumber = Number(pdpPrice);
-              const ProductFinalPrice = document.querySelector("[data-ProductFinalPrice]");
-  
-              const finalPrice = pdpPriceNumber * (hiddenWidthInputvalue * hiddenHeightInputValue);
-              ProductFinalPrice.value = finalPrice;
-              
-            }
-  
-            const heightFeetSelect = document.querySelector('[data-height-feet-main]');
-            {% comment %} const heightInchSelect = document.querySelector('[data-height-inch-main]'); {% endcomment %}
-            const widthFeetSelect = document.querySelector('[data-width-feet-main]');
-            {% comment %} const widthInchSelect = document.querySelector('[data-width-inch-main]'); {% endcomment %}
-  
-            heightFeetSelect.addEventListener('change', updateHiddenInput);
-            {% comment %} heightInchSelect.addEventListener('change', updateHiddenInput); {% endcomment %}
-            widthFeetSelect.addEventListener('change', updateHiddenInput);
-            {% comment %} widthInchSelect.addEventListener('change', updateHiddenInput); {% endcomment %}
-          </script>
-
-          <input type="hidden" 
-            class='laaal'
-            data-ProductFinalPrice 
-            name="properties[productfinalprice]"
-          >
 
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
@@ -228,12 +83,17 @@
             type="submit"
             name="add"
             class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
-            {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+            {% if product.selected_or_first_available_variant.available == false
+              or quantity_rule_soldout
+              or product.selected_or_first_available_variant == nil
+            %}
               disabled
             {% endif %}
           >
             <span>
-              {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+              {%- if product.selected_or_first_available_variant == nil -%}
+                {{ 'products.product.unavailable' | t }}
+              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
