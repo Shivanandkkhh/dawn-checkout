@@ -84,10 +84,14 @@
                   value="true"
         >
           {% endif  %}
-        <input
-                  name="properties[_order_number]"
-                  value="true"
-        >
+      {% if customer %}
+            {% assign order_count = customer.orders | size %}
+         order count   {{ order_count }}
+             <input
+                type="hidden"
+                name="properties[_order_count]"
+                value="{{ order_count }}">
+  {% endif %}
         
         
           <div class="Height_measure">
