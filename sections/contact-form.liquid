@@ -111,6 +111,38 @@
         <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
       </div>
       <div class="field">
+        <input
+          type="number"
+          id="ContactForm-followers"
+          class="field__input"
+          name="contact[Number of Followers]"
+          placeholder="Number of Followers"
+        >
+        <label class="field__label" for="ContactForm-followers">Number of Followers</label>
+      </div>
+      <!-- Added: Address -->
+      <div class="field">
+        <input
+          type="text"
+          id="ContactForm-address"
+          class="field__input"
+          name="contact[Address]"
+          placeholder="Address"
+        >
+        <label class="field__label" for="ContactForm-address">Address</label>
+      </div>
+      <!-- Added: TikTok Profile Link -->
+      <div class="field">
+        <input
+          type="url"
+          id="ContactForm-tiktok"
+          class="field__input"
+          name="contact[TikTok Profile Link]"
+          placeholder="TikTok Profile Link"
+        >
+        <label class="field__label" for="ContactForm-tiktok">TikTok Profile Link</label>
+      </div>
+      <div class="field">
         <textarea
           rows="10"
           id="ContactForm-body"
