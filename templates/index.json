@@ -61,6 +61,7 @@
       "block_order": [
         "forms_inline_wxGPQt"
       ],
+      "disabled": true,
       "settings": {
         "include_margins": true
       }
