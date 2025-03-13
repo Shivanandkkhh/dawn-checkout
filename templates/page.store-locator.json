@@ -15,9 +15,14 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "store_locator_FCaBhB": {
+      "type": "store-locator",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "store_locator_FCaBhB"
   ]
 }
