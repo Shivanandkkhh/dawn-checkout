@@ -1,6 +1,38 @@
+<div id="map" style="height: 400px; width: 100%;"></div>
+
+<!-- Leaflet.js CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<!-- Leaflet.js JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var storeLocation = [40.7128, -74.0060]; // Replace with your store's coordinates
+
+    var map = L.map('map').setView(storeLocation, 15);
+
+    // Use OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add marker
+    L.marker(storeLocation).addTo(map)
+        .bindPopup("Our Store Location")
+        .openPopup();
+});
+</script>
+
+
 {% schema %}
   {
-    "name": "Section name",
-    "settings": []
+    "name": "Store locator",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Store locator"
+      }
+    ]
   }
 {% endschema %}
