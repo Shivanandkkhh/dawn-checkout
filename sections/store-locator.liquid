@@ -8,22 +8,28 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    var storeLocation = [47.00942, 6.9381]; // Replace with your store's coordinates
+    // Define multiple store locations
+    var storeLocations = [
+        { coords: [47.00942, 6.9381], name: "Store 1 - Location A" },
+        { coords: [46.2081217, 6.1257207], name: "Store 2 - Location B" }
+    ];
 
-    var map = L.map('map').setView(storeLocation, 15);
+    // Create the map centered at the first location
+    var map = L.map('map').setView(storeLocations[0].coords, 8);
 
     // Use OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Add marker
-    L.marker(storeLocation).addTo(map)
-        .bindPopup("Our Store Location")
-        .openPopup();
+    // Add markers for each location
+    storeLocations.forEach(function(store) {
+        L.marker(store.coords).addTo(map)
+            .bindPopup(store.name)
+            .openPopup();
+    });
 });
 </script>
-
 
 {% schema %}
   {
