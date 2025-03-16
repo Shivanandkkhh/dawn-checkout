@@ -158,6 +158,11 @@
         "type": "shopify://apps/hulk-form-builder/blocks/app-embed/b6b8dd14-356b-4725-a4ed-77232212b3c3",
         "disabled": false,
         "settings": {}
+      },
+      "3066834073402364550": {
+        "type": "shopify://apps/sellup-upsell-add-ons/blocks/global_sellup/001ec440-29ea-4cbf-9265-4963fa825261",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
