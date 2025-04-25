@@ -376,7 +376,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 
-{% assign video_tiles =  pages['global-cart-data'].metafields.value %}
-    ppp  {{ video_tiles| json  }} 
+{% assign video_tiles =  pages['global-cart-data'].metafields.custom.upsell_products %}
+    ppp  {{ video_tiles | json  }} 
   </body>
 </html>
