@@ -377,6 +377,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 {% assign video_tiles =  pages['global-cart-data'].metafields.custom.upsell_products %}
-    ppp  {{ video_tiles.value | json  }} 
+    ppp  {{ video_tiles.value.id | json  }} 
   </body>
 </html>
