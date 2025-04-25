@@ -375,6 +375,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-    {{ page.metafeilds.custom.upsell_products | json }}
+
+    {% assign global_page = pages['global-cart-data'] %}
+{% assign video_tiles =  global_page.metafields.custom.video_tiles.value %}
+{{ video_tiles| json  }}
   </body>
 </html>
